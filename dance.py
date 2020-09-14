@@ -28,7 +28,7 @@ def animate(_):
 
 
 dance = animation.FuncAnimation(
-    figure, animate, init_func=init, frames=500, interval=20, blit=True
+    figure, animate, init_func=init, frames=500, interval=90, blit=True
 )
 mplt.axis("off")
 mplt.show()
