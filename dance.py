@@ -15,18 +15,20 @@ def uuid_as_list() -> List[int]:
 
 
 pyplot.style.use("dark_background")
+
 figure = pyplot.figure()
 axes = pyplot.axes(xlim=(0, 35), ylim=(0, 15))
-(line_1,) = axes.plot([], [], linewidth=2.0, color="#00F5EA", drawstyle="steps-mid")
-(line_2,) = axes.plot([], [], linewidth=1.0, color="#0085F5", drawstyle="steps-mid")
 (line_3,) = axes.plot([], [], linewidth=0.5, color="#000BF5", drawstyle="steps-mid")
+(line_2,) = axes.plot([], [], linewidth=1.0, color="#0085F5", drawstyle="steps-mid")
+(line_1,) = axes.plot([], [], linewidth=2.0, color="#00F5EA", drawstyle="steps-mid")
 
 uuid_queue = [uuid_as_list()] * 3
 x_data = [x for x in range(36)]
 
 
 def init() -> Tuple[Line2D]:
-    """Animation init."""
+    """Animation init.
+    Only required for blitting to give a clean slate."""
     line_1.set_data([], [])
     line_2.set_data([], [])
     line_3.set_data([], [])
@@ -42,10 +44,16 @@ def animate(_: Any) -> Tuple[Line2D]:
     return (line_3, line_2, line_1)
 
 
-dance = animation.FuncAnimation(
-    figure, animate, init_func=init, frames=500, interval=100, blit=True
-)
 pyplot.axis("off")
+dance = animation.FuncAnimation(
+    figure,
+    animate,
+    init_func=init,
+    frames=None,
+    interval=100,
+    save_count=100,
+    blit=True,
+)
 
 if sys.argv[1] == "save":
     dance.save(sys.argv[2] + ".gif", writer="imagemagick")
