@@ -4,7 +4,7 @@ Fancy visualization of UUID.
 ![GIF](test.gif)
 
 ## Usage
-Requires `matplotlib`.
+Requires `matplotlib` and `imagemagick`.
 
 ### To show a plot with infinite animation
 ```bash
